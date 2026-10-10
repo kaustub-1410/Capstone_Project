@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+venv/
+.venv/
+env/
+
+# Environment
+.env
+.env.local
+
+# Generated output
+reports/*.md
+playbooks/containment_script.*
+playbooks/contain__*.yml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.suo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Frontend (see frontend/.gitignore for npm specifics)
+frontend/node_modules/
+frontend/dist/

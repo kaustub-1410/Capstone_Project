@@ -1,0 +1,396 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  
+  --color-glass-light: rgba(255, 255, 255, 0.02);
+  --color-glass-border: rgba(255, 255, 255, 0.06);
+  --color-glass-hover: rgba(255, 255, 255, 0.08);
+  
+  --animate-fade-in-slow: fadeIn 2s ease-out forwards;
+  --animate-fade-in-medium: fadeIn 1.2s ease-out forwards;
+  --animate-float-slow: float 8s ease-in-out infinite;
+  --animate-dash-flow: dashFlow 1.5s linear infinite;
+
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes dashFlow {
+    to { stroke-dashoffset: -20; }
+  }
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @apply bg-black text-white font-sans overflow-x-hidden;
+  background-color: #000000;
+}
+
+/* Custom Scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Liquid Glass CSS */
+.liquid-glass {
+  background: rgba(0, 0, 0, 0.4);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.3) 0%,
+    rgba(255,255,255,0.1) 20%,
+    rgba(255,255,255,0) 40%,
+    rgba(255,255,255,0) 60%,
+    rgba(255,255,255,0.1) 80%,
+    rgba(255,255,255,0.3) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Liquid Glass / Glassmorphism effects */
+.glassmorphism {
+  background: rgba(10, 14, 22, 0.85);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transform: translate3d(0, 0, 0);
+}
+
+.glassmorphism-card {
+  background: rgba(12, 16, 26, 0.75);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s ease, border-color 0.5s ease;
+  transform: translate3d(0, 0, 0);
+}
+
+.glassmorphism-card:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translate3d(0, -4px, 0);
+}
+
+/* Liquid Glass Button - smooth and glowing organic style */
+.liquid-glass-button {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.01), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), background 0.5s ease, border-color 0.5s ease;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.liquid-glass-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transform: skewX(-15deg);
+  transition: 0.75s;
+}
+
+.liquid-glass-button:hover::before {
+  left: 120%;
+}
+
+.liquid-glass-button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  transform: translate3d(0, 0, 0) scale(1.02);
+}
+
+/* GPU Hardware Acceleration Utilities */
+.transform-gpu {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.will-change-transform {
+  will-change: transform;
+}
+
+/* Text masking and gradients for natural lighting */
+.gradient-text-subtle {
+  background: linear-gradient(to bottom, #ffffff, #c2c2c2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* =====================================================
+   MULTI-PAGE LAYOUT SYSTEM
+   ===================================================== */
+
+/* Root layout: sidebar + main content side by side */
+.layout-root {
+  display: flex;
+  min-height: 100vh;
+  background-color: #050505;
+}
+
+/* Desktop Sidebar */
+.sidebar-desktop {
+  display: none;
+  flex-direction: column;
+  width: 220px;
+  min-width: 220px;
+  background: rgba(8, 10, 16, 0.95);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 50;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .sidebar-desktop {
+    display: flex;
+  }
+}
+
+/* Brand Area */
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.sidebar-brand-text {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 300;
+}
+
+/* Navigation */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 12px;
+  gap: 2px;
+  flex: 1;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 400;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  text-decoration: none;
+}
+
+.sidebar-link:hover {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.sidebar-link-active {
+  color: rgba(255, 255, 255, 0.95) !important;
+  background: rgba(0, 245, 212, 0.06) !important;
+}
+
+.sidebar-link-indicator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: #00f5d4;
+  border-radius: 0 3px 3px 0;
+  transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sidebar-link-active .sidebar-link-indicator {
+  height: 20px;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.sidebar-footer-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00f5d4;
+  box-shadow: 0 0 8px rgba(0, 245, 212, 0.5);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Mobile Header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(8, 10, 16, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+@media (min-width: 768px) {
+  .mobile-header {
+    display: none;
+  }
+}
+
+/* Mobile Backdrop & Drawer */
+.mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 45;
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 260px;
+  background: rgba(8, 10, 16, 0.98);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 50;
+  overflow-y: auto;
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    margin-left: 220px;
+  }
+}
+
+/* Page transition wrapper */
+.page-transition-wrapper {
+  min-height: 100vh;
+}
+
+/* =====================================================
+   HERO ANIMATED MESH BACKGROUND
+   Replaces external video with pure CSS gradients
+   ===================================================== */
+.hero-mesh-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.25;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0, 245, 212, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 60% at 80% 20%, rgba(131, 56, 236, 0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 70% 50% at 50% 80%, rgba(58, 134, 255, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 70% 60%, rgba(255, 0, 110, 0.06) 0%, transparent 70%);
+  animation: meshDrift 20s ease-in-out infinite;
+  filter: blur(60px);
+}
+
+@keyframes meshDrift {
+  0%, 100% {
+    background-position: 0% 0%, 100% 0%, 50% 100%, 70% 50%;
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    background-position: 30% 20%, 70% 30%, 20% 70%, 80% 40%;
+    transform: scale(1.05) rotate(0.5deg);
+  }
+  50% {
+    background-position: 60% 40%, 40% 60%, 80% 30%, 30% 70%;
+    transform: scale(1.02) rotate(-0.5deg);
+  }
+  75% {
+    background-position: 20% 60%, 80% 40%, 40% 50%, 60% 80%;
+    transform: scale(1.06) rotate(0.3deg);
+  }
+}
