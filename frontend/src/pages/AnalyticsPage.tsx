@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { BarChart3, TrendingUp, AlertTriangle, Shield, Activity, Loader2 } from "lucide-react";
 import PageTransition from "../components/PageTransition";
+import { apiUrl } from "../lib/api";
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -46,7 +47,7 @@ export default function AnalyticsPage() {
   const runQuickAnalysis = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/run?mode=standard", { method: "POST" });
+      const response = await fetch(apiUrl("/api/run?mode=standard"), { method: "POST" });
       if (response.ok) {
         const data = await response.json();
         const record: RunRecord = {

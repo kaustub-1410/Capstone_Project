@@ -5,6 +5,7 @@ import {
   CheckCircle2, Flame, KeyRound, Mail, FileCode, ShieldCheck, Zap
 } from "lucide-react";
 import PageTransition from "../components/PageTransition";
+import { apiUrl } from "../lib/api";
 
 // Cyber Attack Options
 const attackOptions = [
@@ -197,7 +198,7 @@ export default function SimulationPage() {
     });
 
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/run?mode=${simMode}&attack=${selectedAttack}`, { method: "POST" });
+      const response = await fetch(apiUrl(`/api/run?mode=${simMode}&attack=${selectedAttack}`), { method: "POST" });
       if (!response.ok) throw new Error("Failed to contact the simulation dashboard API");
       const data = await response.json();
       setRunId(data.run_id);
@@ -205,7 +206,7 @@ export default function SimulationPage() {
       playbackTicks(data, defaultHosts);
     } catch (err: any) {
       console.error(err);
-      alert(`Simulation Error: Could not start. Ensure the backend server is running on port 8000. Detail: ${err.message}`);
+      alert(`Simulation Error: Could not reach the API. Check that the backend is deployed and the API URL is configured correctly. Detail: ${err.message}`);
       setIsSimulating(false);
     }
   };
